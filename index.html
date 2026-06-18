@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[Your Name] | Portfolio</title>
+  <!-- Google Fonts for Modern Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <!-- AOS Animation Library -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <style>
+    /* Base and Reset */
+    :root {
+      --primary: #ff6f61;
+      --primary-hover: #e65a4c;
+      --bg-light: #f8f9fa;
+      --text-dark: #2d3436;
+      --text-muted: #636e72;
+      --card-bg: #ffffff;
+    }
+    html { 
+      scroll-behavior: smooth; 
+      scroll-padding-top: 80px; /* Accounts for sticky header */
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0; padding: 0;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    /* Navigation - Glassmorphism */
+    header {
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    }
+    .navbar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 5%; max-width: 1200px; margin: 0 auto;
+    }
+    .navbar h2 { margin: 0; font-weight: 700; color: var(--text-dark); }
+    .navbar ul { list-style: none; display: flex; gap: 2rem; margin: 0; padding: 0; }
+    .navbar a {
+      text-decoration: none; color: var(--text-dark); font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    .navbar a:hover { color: var(--primary); }
+
+    /* Shared Section Styling */
+    section { padding: 5rem 5%; max-width: 1200px; margin: 0 auto; text-align: center; min-height: auto; display: block; }
+    h1, h2, h3 { color: var(--text-dark); margin-top: 0; }
+    h2 { font-size: 2.5rem; margin-bottom: 2.5rem; position: relative; display: inline-block; }
+    h2::after {
+      content: ''; position: absolute; width: 50%; height: 4px;
+      background: var(--primary); bottom: -10px; left: 25%; border-radius: 2px;
+    }
+
+    /* Hero Section */
+    .hero { min-height: 75vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+    .hero h1 { font-size: 4rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: -1px; }
+    .hero p { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 2rem; }
+    .scroll-down {
+      text-decoration: none; color: var(--primary); font-weight: 600; font-size: 1.1rem;
+      border: 2px solid var(--primary); padding: 0.8rem 2.5rem; border-radius: 30px;
+      transition: all 0.3s ease;
+    }
+    .scroll-down:hover { background: var(--primary); color: white; }
+
+    /* About Section */
+    .about { display: flex; align-items: center; justify-content: center; gap: 3rem; text-align: left; flex-wrap: wrap; }
+    .about img { width: 300px; height: 300px; border-radius: 50%; object-fit: cover; box-shadow: 0 15px 30px rgba(0,0,0,0.15); border: 5px solid white; }
+    .about-content { max-width: 500px; }
+    .about-content h2::after { left: 0; }
+    .about-content p { font-size: 1.1rem; color: var(--text-muted); }
+
+    /* Projects Section */
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem; text-align: left;
+    }
+    .project-card {
+      background: var(--card-bg); padding: 2.5rem; border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .project-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
+    .project-card h3 { font-size: 1.5rem; }
+    .project-card p { color: var(--text-muted); margin-bottom: 2rem; }
+    .project-card a {
+      display: inline-block; background: var(--primary); color: white !important;
+      padding: 0.7rem 1.5rem; border-radius: 25px; font-weight: 600; text-decoration: none !important;
+      transition: background 0.3s ease;
+    }
+    .project-card a:hover { background: var(--primary-hover); }
+
+    /* Milestones Section */
+    #milestones { max-width: 100%; background: #1f1c2c; color: white; }
+    #milestones h2 { color: white; }
+    .timeline {
+      position: relative; max-width: 900px; margin: 0 auto; padding: 2rem 0;
+    }
+    .timeline::before {
+      content: ''; position: absolute; width: 4px; background: var(--primary);
+      top: 0; bottom: 0; left: 50%; margin-left: -2px; border-radius: 2px;
+    }
+    .timeline-item { padding: 10px 40px; position: relative; width: 50%; box-sizing: border-box; }
+    .timeline-item:nth-child(odd) { left: 0; text-align: right; }
+    .timeline-item:nth-child(even) { left: 50%; text-align: left; }
+    .timeline-icon {
+      position: absolute; top: 15px; right: -24px; background: #2d3436;
+      width: 48px; height: 48px; border-radius: 50%; display: flex;
+      align-items: center; justify-content: center; font-size: 1.5rem;
+      border: 4px solid var(--primary); z-index: 1;
+      box-shadow: 0 0 10px rgba(255,111,97,0.3);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+    }
+    .timeline-item:nth-child(even) .timeline-icon { left: -24px; }
+    .timeline-item:hover .timeline-icon { transform: scale(1.2); box-shadow: 0 0 20px rgba(255,111,97,0.8); }
+    .timeline-content {
+      padding: 1.5rem; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px);
+      border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);
+      transition: transform 0.3s ease;
+    }
+    .timeline-content:hover { transform: translateY(-5px); }
+    .timeline-content h3 { margin-top: 0.5rem; color: white; font-size: 1.3rem; margin-bottom: 0.5rem; }
+    .timeline-content p { color: #b2bec3; margin: 0; }
+    .timeline-content .date { color: var(--primary); font-weight: 600; font-size: 0.95rem; display: block; }
+
+    /* Contact Section */
+    .contact form {
+      max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.2rem;
+      background: white; padding: 2.5rem; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+    .contact input, .contact textarea {
+      width: 100%; padding: 1rem; border: 1px solid #e1e1e1; border-radius: 8px;
+      font-family: inherit; font-size: 1rem; background: #fafafa;
+      transition: border-color 0.3s ease; box-sizing: border-box;
+    }
+    .contact input:focus, .contact textarea:focus { outline: none; border-color: var(--primary); background: white; }
+    .contact textarea { resize: vertical; min-height: 150px; }
+    .contact button {
+      padding: 1.2rem; background: var(--primary); color: white; border: none;
+      border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: background 0.3s ease;
+    }
+    .contact button:hover { background: var(--primary-hover); }
+
+    /* Footer */
+    footer { text-align: center; padding: 2rem; background: #2d3436; color: #dfe6e9; margin-top: 3rem; }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .navbar { flex-direction: column; gap: 1rem; }
+      .hero h1 { font-size: 2.5rem; }
+      .about { flex-direction: column; text-align: center; }
+      .about-content h2::after { left: 25%; }
+      /* Timeline Responsive */
+      .timeline::before { left: 31px; }
+      .timeline-item { width: 100%; padding-left: 80px; padding-right: 20px; text-align: left !important; }
+      .timeline-item:nth-child(even) { left: 0; }
+      .timeline-icon { left: 7px !important; right: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <header>
+    <nav class="navbar">
+      <h2>[Your Name].</h2>
+      <ul>
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#milestones">Milestones</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="hero" class="hero" data-aos="fade-up">
+      <h1>Hi, I'm [Your Name]</h1>
+      <p>Software Engineer | Java Developer | IoT Enthusiast</p>
+      <a href="#about" class="scroll-down">↓ Scroll</a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about" data-aos="fade-right">
+      <img src="profile_placeholder.jpg" alt="Portrait of [Your Name]">
+      <div class="about-content">
+        <h2>About Me</h2>
+        <p>Passionate about software engineering, building modern applications, and designing smart environmental monitoring systems with practical sensor integrations.</p>
+      </div>
+    </section>
+
+  <!-- Milestones Section -->
+  <section id="milestones" class="milestones">
+    <h2 data-aos="fade-up">Milestones</h2>
+    <div class="timeline">
+      <div class="timeline-item" data-aos="fade-up">
+        <div class="timeline-icon">🎓</div>
+        <div class="timeline-content">
+          <span class="date">2019</span>
+          <h3>G.C.E. Advance Level: Physical Science Stream</h3>
+          <p>Central College Bandarawela, Sri Lanka</p>
+        </div>
+      </div>
+      <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+        <div class="timeline-icon">🎓</div>
+        <div class="timeline-content">
+          <span class="date">March 2020 – December 2023</span>
+          <h3>BSc (Hons) in Computer Science</h3>
+          <p>University of Plymouth<br>Awarded Second Class Honours (Upper Division)</p>
+        </div>
+      </div>
+      <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+        <div class="timeline-icon">💼</div>
+        <div class="timeline-content">
+          <span class="date">December 4, 2023</span>
+          <h3>Software Engineer Intern</h3>
+          <p>InEight Sri Lanka<br>Role: .NET Back‑end Developer</p>
+        </div>
+      </div>
+      <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+        <div class="timeline-icon">💼</div>
+        <div class="timeline-content">
+          <span class="date">March 1, 2025 – Present</span>
+          <h3>Software Engineer</h3>
+          <p>InEight Sri Lanka<br>Role: .NET Full‑Stack Developer</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="projects" data-aos="zoom-in">
+    <h2>Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <h3>Smart Environmental Monitor</h3>
+        <p>An IoT system focused on system health monitoring using strategic sensor placement.</p>
+        <a href="https://github.com/ZeroTrace0245" target="_blank">View on GitHub</a>
+      </div>
+      <div class="project-card">
+        <h3>Gantt Chart Project Manager</h3>
+        <p>A comprehensive tool for creating and modifying dynamic project management Gantt charts.</p>
+        <a href="https://github.com/ZeroTrace0245" target="_blank">View on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact" data-aos="fade-up">
+    <h2>Contact Me</h2>
+    <form action="#" method="POST">
+      <input type="text" name="name" placeholder="Your Name" aria-label="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" aria-label="Your Email" required>
+      <textarea name="message" placeholder="Message" aria-label="Message" required></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+  </main>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; 2026 [Your Name]. All rights reserved.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true
+    });
+  </script>
+</body>
+</html>
