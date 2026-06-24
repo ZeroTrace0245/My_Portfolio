@@ -69,26 +69,32 @@ section {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  width: 300px;
+  width: 100%;
+  max-width: 800px;
 }
 
 .contact input, .contact textarea {
-  padding: 10px;
-  border: none;
+  padding: 12px 15px;
+  border: 1px solid #e1e1e1;
   border-radius: 8px;
   font-family: inherit;
+  background: white;
+  color: #2d3436;
 }
 
 .contact button {
   background: #ff6f61;
   color: #fff;
   border: none;
-  padding: 12px;
+  padding: 12px 24px;
   border-radius: 8px;
   cursor: pointer;
   transition: background 0.3s ease;
   font-family: inherit;
   font-weight: bold;
+  align-self: center;
+  width: 100%;
+  max-width: 250px;
 }
 
 .contact button:hover {
